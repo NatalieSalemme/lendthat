@@ -12,14 +12,14 @@ module.exports = app => {
     '/auth/google/callback',
     passport.authenticate('google'),
     (req, res) => {
-      res.redirect('/');
+      res.redirect('/dashboard');
     }
   );
 
   app.get('/api/logout', (req, res) => {
     //takes cookie that contains our users id and removes id that is in there. logout is provided by request
     req.logout();
-    res.send(req.user);
+    res.redirect('/');
   });
 
   app.get('/api/current_user', (req, res) => {

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Navbar from './Navbar';
 import Dashboard from './Dashboard';
+import Landing from './Landing';
 
 class App extends Component {
   componentDidMount() {
@@ -15,7 +16,8 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Navbar />
-            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/dashboard" component={Dashboard} />
           </div>
         </BrowserRouter>
       </div>

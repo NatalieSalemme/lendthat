@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
   renderContent() {
@@ -15,7 +16,7 @@ class Navbar extends Component {
       default:
         return (
           <li>
-            <a>Logout</a>
+            <a href="/api/logout">Logout</a>
           </li>
         );
     }
@@ -24,7 +25,7 @@ class Navbar extends Component {
     console.log(this.props);
     return (
       <div style={{ backgroundColor: 'gray' }}>
-        <h3>LendThat</h3>
+        <Link to={this.props.auth ? '/dashboard' : '/'}>LendThat</Link>
         {this.renderContent()}
       </div>
     );
