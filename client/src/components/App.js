@@ -6,6 +6,8 @@ import Navbar from './Navbar';
 import Dashboard from './Dashboard';
 import Landing from './Landing';
 import Browse from './Browse';
+import Lend from './Lend';
+import Borrow from './Borrow';
 
 class App extends Component {
   componentDidMount() {
@@ -20,6 +22,8 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/browse" component={Browse} />
+            <Route exact path="/lend" component={Lend} />
+            <Route exact path="/borrow" component={Borrow} />
           </div>
         </BrowserRouter>
       </div>

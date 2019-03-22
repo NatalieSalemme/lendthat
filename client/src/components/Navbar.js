@@ -12,7 +12,8 @@ class Navbar extends Component {
         return (
           <li className="nav-item">
             <a className="nav-link text-md-right pr-5" href="/auth/google/">
-              Login with Google
+              <i className="fab fa-google text-danger pr-2"> </i>
+              <span>Login with Google</span>
             </a>
           </li>
         );
@@ -83,9 +84,16 @@ class Navbar extends Component {
                 </Link>
               </li>
               <li className="nav-item ">
-                <a className="nav-link text-secondary" href="#">
-                  Pricing
-                </a>
+                <Link to="/lend" className="nav-link text-secondary">
+                  <i className="fas fa-camera pr-1 text-dark" />
+                  Lend
+                </Link>
+              </li>
+              <li className="nav-item ">
+                <Link to="/borrow" className="nav-link text-secondary">
+                  <i class="fas fa-hand-holding-heart text-dark pr-1" />
+                  Borrow
+                </Link>
               </li>
             </div>
             <div>{this.renderContent()}</div>
