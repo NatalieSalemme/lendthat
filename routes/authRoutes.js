@@ -9,4 +9,14 @@ module.exports = app => {
   );
 
   app.get('/auth/google/callback', passport.authenticate('google'));
+
+  app.get('/api/logout', (req, res) => {
+    //takes cookie that contains our users id and removes id that is in there. logout is provided by request
+    req.logout();
+    res.send(req.user);
+  });
+
+  app.get('/api/current_user', (req, res) => {
+    res.send(req.user);
+  });
 };
