@@ -5,6 +5,7 @@ import * as actions from '../actions';
 import Navbar from './Navbar';
 import Dashboard from './Dashboard';
 import Landing from './Landing';
+import Browse from './Browse';
 
 class App extends Component {
   componentDidMount() {
@@ -18,6 +19,7 @@ class App extends Component {
             <Navbar />
             <Route exact path="/" component={Landing} />
             <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/browse" component={Browse} />
           </div>
         </BrowserRouter>
       </div>
