@@ -17,6 +17,10 @@ const itemSchema = new Schema({
     type: Boolean,
     default: true,
   },
+  city: {
+    type: String,
+    required: true,
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,

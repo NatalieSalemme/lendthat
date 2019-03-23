@@ -91,7 +91,7 @@ class Navbar extends Component {
               </li>
               <li className="nav-item ">
                 <Link to="/borrow" className="nav-link text-secondary">
-                  <i class="fas fa-hand-holding-heart text-dark pr-1" />
+                  <i className="fas fa-hand-holding-heart text-dark pr-1" />
                   Borrow
                 </Link>
               </li>
