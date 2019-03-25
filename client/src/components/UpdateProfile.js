@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  // updateProfile,
-  fetchUser,
-} from '../actions/index';
+import { fetchUser, updateProfile } from '../actions/index';
 
 class UpdateProfile extends Component {
   state = {
@@ -12,7 +9,7 @@ class UpdateProfile extends Component {
   };
   componentDidMount() {
     this.props.fetchUser();
-    console.log('did mount**', this.props);
+    // console.log('did mount**', this.props);
   }
 
   // static getDerivedStateFromProps(nextProps, prevState) {
@@ -37,13 +34,22 @@ class UpdateProfile extends Component {
     });
   };
 
+  onSubmit = e => {
+    e.preventDefault();
+    const profileData = {
+      displayName: this.state.displayName,
+      city: this.state.city,
+    };
+    console.log('submitting');
+    this.props.updateProfile(profileData);
+  };
   render() {
-    console.log('render', this.props);
-    const { displayName } = this.props;
+    // console.log('render', this.props);
+
     return (
       <div>
         <h3 className="text-center mt-5">Update Profile</h3>
-        <form className="text-center ">
+        <form onSubmit={this.onSubmit} className="text-center ">
           {/* <div className="form-group row col-md-4 mx-auto mt-5">
             <label htmlFor="exampleFormControlFile1">Display Photo</label>
             <input type="file" className="form-control-file" />
@@ -51,13 +57,14 @@ class UpdateProfile extends Component {
           <div>
             <img
               className="col-md-4 mb-2 mt-5"
+              alt="avatar"
               style={{ width: '200px', height: '200px' }}
               src="https://feedback.seekingalpha.com/s/cache/72/3d/723d8a2e1fe33239a23ce16590b489f3.png"
             />
           </div>
-          <div class="custom-file col-md-4 mt-4">
-            <input type="file" class="custom-file-input" id="customFile" />
-            <label class="custom-file-label" for="customFile">
+          <div className="custom-file col-md-4 mt-4">
+            <input type="file" className="custom-file-input" id="customFile" />
+            <label className="custom-file-label" htmlFor="customFile">
               Update Display Photo
             </label>
           </div>
@@ -89,9 +96,7 @@ class UpdateProfile extends Component {
             <input
               type="text"
               className="
-                form-control
-
-                "
+                form-control"
               // className="
               // form-control
               // is-valid
@@ -122,7 +127,7 @@ function mapStateToProps({ auth }) {
 export default connect(
   mapStateToProps,
   {
-    // updateProfile
+    updateProfile,
     fetchUser,
   }
 )(UpdateProfile);
