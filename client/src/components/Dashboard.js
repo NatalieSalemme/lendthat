@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
-import UpdateProfile from './UpdateProfile';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class Dashboard extends Component {
   render() {
+    const { auth } = this.props;
+
     return (
-      <div>
-        <h3>Dashboard</h3>
+      <div className="container text-center">
+        <h1 className="mt-5">Dashboard</h1>
+        <h3 className="text-auto">Hello {auth && auth.displayName}!</h3>
         <Link to="/update-profile">Update Profile</Link>
       </div>
     );
   }
 }
+function mapStateToProps({ auth }) {
+  return { auth };
+}
 
-export default Dashboard;
+export default connect(mapStateToProps)(Dashboard);

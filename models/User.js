@@ -5,11 +5,9 @@ const userSchema = new Schema({
   googleId: String,
   city: {
     type: String,
-    required: true,
   },
-  displayname: {
+  displayName: {
     type: String,
-    required: true,
   },
 });
 //Not using export due to possible issues during testing, require it into other files instead

@@ -32,7 +32,7 @@ class Navbar extends Component {
     }
   }
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       // <div style={{ backgroundColor: 'gray' }}>
       //   <Link to={this.props.auth ? '/dashboard' : '/'}>LendThat</Link>
