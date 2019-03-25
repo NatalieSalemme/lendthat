@@ -1,4 +1,5 @@
 const passport = require('passport');
+const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
   app.get(
@@ -23,6 +24,14 @@ module.exports = app => {
   });
 
   app.get('/api/current_user', (req, res) => {
+    console.log(req.user);
     res.send(req.user);
+  });
+
+  app.get('/api/profile', requireLogin, (req, res) => {
+    res.send('testing get');
+  });
+  app.post('/api/profile', requireLogin, (req, res) => {
+    res.send('testing post');
   });
 };
