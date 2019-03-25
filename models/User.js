@@ -9,6 +9,9 @@ const userSchema = new Schema({
   displayName: {
     type: String,
   },
+  photo: {
+    type: String,
+  },
 });
 //Not using export due to possible issues during testing, require it into other files instead
 mongoose.model('users', userSchema);

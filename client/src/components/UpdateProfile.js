@@ -6,6 +6,7 @@ class UpdateProfile extends Component {
   state = {
     displayName: '',
     city: '',
+    photo: '',
   };
   componentDidMount() {
     this.props.fetchUser();
@@ -24,6 +25,7 @@ class UpdateProfile extends Component {
       this.setState({
         displayName: nextProps.auth.displayName,
         city: nextProps.auth.city,
+        photo: nextProps.auth.photo,
       });
     }
   }
@@ -45,6 +47,7 @@ class UpdateProfile extends Component {
   };
   render() {
     // console.log('render', this.props);
+    console.log(this.props);
 
     return (
       <div>
@@ -58,8 +61,9 @@ class UpdateProfile extends Component {
             <img
               className="col-md-4 mb-2 mt-5"
               alt="avatar"
-              style={{ width: '200px', height: '200px' }}
-              src="https://feedback.seekingalpha.com/s/cache/72/3d/723d8a2e1fe33239a23ce16590b489f3.png"
+              style={{ width: '250px', height: '220px' }}
+              src={this.state.photo}
+              // src="https://feedback.seekingalpha.com/s/cache/72/3d/723d8a2e1fe33239a23ce16590b489f3.png"
             />
           </div>
           <div className="custom-file col-md-4 mt-4">

@@ -41,7 +41,6 @@ module.exports = app => {
     profileFields.displayName = req.body.displayName;
     profileFields.city = req.body.city;
     User.findById(req.user.id).then(user => {
-      // console.log('profileFields***', profileFields);
       if (user) {
         User.findOneAndUpdate(
           { _id: req.user.id },
@@ -50,23 +49,5 @@ module.exports = app => {
         ).then(user => res.json(user));
       }
     });
-    // User.findByIdAndUpdate(
-    //   req.user.id,
-    //   {
-    //     displayName: req.body.displayName,
-    //     city: req.body.city,
-    //   },
-    //   { new: true }
-    // ).then(user => {
-    //   user.save();
-    //   console.log(user);
-    //   res.send(user);
-    // });
-    // User.findOne({ googleId: req.user.googleId }).then(user => {
-    //   // const profileData = {};
-    //   // profileData._id = req.user.id;
-    //
-    //   res.send(req.user);
-    // });
   });
 };
