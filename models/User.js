@@ -9,7 +9,7 @@ const userSchema = new Schema({
   displayName: {
     type: String,
   },
-  photo: {
+  avatar: {
     type: String,
   },
 });

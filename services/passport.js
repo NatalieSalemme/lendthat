@@ -33,11 +33,11 @@ passport.use(
         return done(null, existingUser);
       }
       //we dont have a user with this id
-      console.log('profile photos***', profile);
+      console.log('***profile', profile);
       const user = await new User({
         googleId: profile.id,
         displayName: profile.displayName,
-        photo: profile.photos[0].value,
+        avatar: Buffer.from(profile.photos[0].value),
       }).save();
       done(null, user);
     }

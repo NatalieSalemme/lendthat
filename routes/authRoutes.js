@@ -1,5 +1,7 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
+const multer = require('multer');
+const sharp = require('sharp');
 const requireLogin = require('../middlewares/requireLogin');
 const User = mongoose.model('users');
 
@@ -49,5 +51,49 @@ module.exports = app => {
         ).then(user => res.json(user));
       }
     });
+  });
+
+  const upload = multer({
+    limits: {
+      fileSize: 1000000,
+    },
+    fileFilter(req, file, cb) {
+      if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+        return cb(new Error('Please upload an image'));
+      }
+      cb(undefined, true);
+    },
+  });
+
+  app.post(
+    '/api/users/current/avatar',
+    passport.authenticate('jwt', { session: false }),
+    upload.single('avatar'),
+    async (req, res) => {
+      const buffer = await sharp(req.file.buffer)
+        .resize({ width: 250, height: 250 })
+        .png()
+        .toBuffer();
+      req.user.avatar = buffer;
+      await req.user.save();
+      res.send();
+    },
+    (error, req, res, next) => {
+      res.status(400).send({ error: error.message });
+    }
+  );
+
+  app.get('/api/users/:id/avatar', async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+      if (!user || !user.avatar) {
+        throw new Error();
+      }
+      res.set('Content-Type', 'image/png');
+      console.log(user.avatar);
+      res.send(user.avatar);
+    } catch (e) {
+      res.status(404).send();
+    }
   });
 };
