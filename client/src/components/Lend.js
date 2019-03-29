@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUser } from '../actions/index';
+import { addItem } from '../actions/itemActions';
 
 class Lend extends Component {
   state = {
     name: '',
-    photo: '',
+    // photo: '',
     price: '',
     available: false,
     city: '',
@@ -20,8 +21,25 @@ class Lend extends Component {
       submitted: false,
     });
   };
+
+  onSubmit = e => {
+    e.preventDefault();
+    const itemData = {
+      name: this.state.name,
+      photo: this.state.photo,
+      price: this.state.price,
+      available: this.state.available,
+      city: this.state.city,
+      owner: this.props.auth._id,
+    };
+    console.log('***itemData', itemData);
+    this.props.addItem(itemData);
+    this.setState({
+      submitted: true,
+    });
+  };
+
   render() {
-    const { auth } = this.props;
     const { name, photo, price, available, city, submitted } = this.state;
     return (
       <div>
@@ -51,7 +69,7 @@ class Lend extends Component {
               <input
                 type="text"
                 className={`form-control ${submitted && !name && 'is-invalid'}`}
-                name="displayName"
+                name="name"
                 placeholder="First name"
                 value={name}
                 onChange={this.onChange}
@@ -102,8 +120,9 @@ class Lend extends Component {
                   name="available"
                   id="availability-false"
                   value="false"
+                  onChange={this.onChange}
                 />
-                <label class="form-check-label" for="inlineRadio1">
+                <label className="form-check-label" htmlFor="inlineRadio1">
                   No
                 </label>
               </div>
@@ -115,8 +134,9 @@ class Lend extends Component {
                   name="available"
                   id="availability-yes"
                   value="yes"
+                  onChange={this.onChange}
                 />
-                <label className="form-check-label" for="inlineRadio2">
+                <label className="form-check-label" htmlFor="inlineRadio2">
                   Yes
                 </label>
               </div>
@@ -137,5 +157,5 @@ function mapStateToProps({ auth }) {
 }
 export default connect(
   mapStateToProps,
-  { fetchUser }
+  { fetchUser, addItem }
 )(Lend);
