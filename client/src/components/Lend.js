@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUser } from '../actions/index';
-import { addItem } from '../actions/itemActions';
+import { addItem, uploadPhoto } from '../actions/itemActions';
 
 class Lend extends Component {
   state = {
@@ -15,6 +15,17 @@ class Lend extends Component {
   componentDidMount() {
     this.props.fetchUser();
   }
+  onPhotoSubmit = e => {
+    e.preventDefault();
+    let bodyFormData = new FormData();
+    bodyFormData.append('photo', e.target.photo.files[0]);
+    console.log(bodyFormData);
+    console.log(e.target.photo.files[0]);
+
+    this.props.uploadPhoto(bodyFormData);
+    // this.props.updateAvatarStatus();
+  };
+
   onChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -54,16 +65,47 @@ class Lend extends Component {
             </div>
           )}
 
-          <form onSubmit={this.onSubmit} className="text-center ">
-            <div>
-              <img
+          <div>
+            <form onSubmit={this.onPhotoSubmit} encType="multipart/form-data">
+              <div className="col-md-4 col-form-label my-3 mx-auto">
+                <input
+                  ref="photo"
+                  type="file"
+                  name="photo"
+                  id="photo"
+                  className="custome-file-input avatar"
+                />
+                <label htmlFor="photo" className="custom-file-label">
+                  Choose File
+                </label>
+              </div>
+              <div className="text-center">
+                <input
+                  type="submit"
+                  value="Upload Photo"
+                  className="btn btn-primary"
+                />
+              </div>
+            </form>
+            {/* <img
                 className="col-md-4 mb-2 mt-5"
                 alt="Avatar"
                 style={{ width: '250px', height: '220px' }}
                 src=""
               />
-            </div>
-
+              <br />
+              <div className="custom-file col-md-4 mx-auto">
+                <input
+                  type="file"
+                  className="custom-file-input"
+                  id="customFile"
+                />
+                <label className="custom-file-label" htmlFor="customFile">
+                  Choose file
+                </label>
+              </div> */}
+          </div>
+          <form onSubmit={this.onSubmit} className="text-center ">
             <div className="form-group row col-md-4 mx-auto mt-3">
               <label htmlFor="validationServer01">Name</label>
               <input
@@ -104,7 +146,7 @@ class Lend extends Component {
               />
               <div className="invalid-feedback">Price cannot be blank</div>
             </div>
-            <div className="text-center">
+            {/* <div className="text-center">
               <label htmlFor="availability" className="text-left">
                 Available?
               </label>
@@ -140,11 +182,11 @@ class Lend extends Component {
                   Yes
                 </label>
               </div>
-            </div>
+            </div> */}
             <br />
 
             <button className="btn btn-primary" type="submit">
-              Submit form
+              Add Item
             </button>
           </form>
         </div>
@@ -157,5 +199,5 @@ function mapStateToProps({ auth }) {
 }
 export default connect(
   mapStateToProps,
-  { fetchUser, addItem }
+  { fetchUser, addItem, uploadPhoto }
 )(Lend);

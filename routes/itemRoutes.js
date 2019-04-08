@@ -20,6 +20,36 @@ module.exports = app => {
     });
     newItem.save().then(item => res.json(item));
   });
+
+  const upload = multer({
+    limits: {
+      fileSize: 1000000,
+    },
+    fileFilter(req, file, cb) {
+      if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+        return cb(new Error('Please upload an image'));
+      }
+      cb(undefined, true);
+    },
+  });
+
+  app.post(
+    '/api/items/lend/photo',
+    passport.authenticate('jwt', { session: false }),
+    upload.single('photo'),
+    async (req, res) => {
+      const buffer = await sharp(req.file.buffer)
+        .resize({ width: 250, height: 250 })
+        .png()
+        .toBuffer();
+      req.item.photo = buffer;
+      await req.user.save();
+      res.send();
+    },
+    (error, req, res, next) => {
+      res.status(400).send({ error: error.message });
+    }
+  );
   // app.post('/api/items/lend/new', requireLogin, (req, res) => {
   //   const itemFields = {};
   //   itemFields.name = req.body.name;
