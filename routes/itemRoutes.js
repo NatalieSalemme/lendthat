@@ -35,7 +35,7 @@ module.exports = app => {
 
   app.post(
     '/api/items/lend/photo',
-    passport.authenticate('jwt', { session: false }),
+    requireLogin,
     upload.single('photo'),
     async (req, res) => {
       const buffer = await sharp(req.file.buffer)
@@ -50,6 +50,18 @@ module.exports = app => {
       res.status(400).send({ error: error.message });
     }
   );
+  app.get('/api/items/browse', requireLogin, (req, res) => {
+    const errors = {};
+    Item.find({})
+      .then(items => {
+        if (!items) {
+          errors.noitems = 'There are no items to display';
+          return res.status(404).json();
+        }
+        res.json(items);
+      })
+      .catch(err => res.status(404).json({ item: 'There are no items' }));
+  });
   // app.post('/api/items/lend/new', requireLogin, (req, res) => {
   //   const itemFields = {};
   //   itemFields.name = req.body.name;

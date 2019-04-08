@@ -107,12 +107,12 @@ class Lend extends Component {
           </div>
           <form onSubmit={this.onSubmit} className="text-center ">
             <div className="form-group row col-md-4 mx-auto mt-3">
-              <label htmlFor="validationServer01">Name</label>
+              <label htmlFor="validationServer01">Item Name</label>
               <input
                 type="text"
                 className={`form-control ${submitted && !name && 'is-invalid'}`}
                 name="name"
-                placeholder="First name"
+                placeholder="Item Name"
                 value={name}
                 onChange={this.onChange}
               />
