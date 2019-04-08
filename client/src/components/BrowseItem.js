@@ -6,31 +6,24 @@ class BrowseItem extends Component {
 
     return (
       <div>
-        <div className="card" style={{ width: '18rem' }}>
+        <div className="card my-4 mx-2" style={{ width: '16rem' }}>
           <img
-            src="https://mastergolflivestream.com/images/clipart-present-item-2.jpg"
-            className="card-img-top"
+            src="https://news.virginia.edu/sites/default/files/styles/uva_basic_article/public/article_image/blood_moon_nasa_header_3-2.jpg?itok=AgnLAcQr"
+            className="card-img-top mx-auto"
+            style={{ height: '125px', width: '100%' }}
             alt="..."
           />
-          <div className="card-body">
-            <h5 className="card-title">Name: {name}</h5>
+          <div className="card-body" style={{ marginBottom: '-1.5em' }}>
+            <h5 className="card-title font-weight-normal">{name}</h5>
           </div>
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item">City: {city}</li>
-            <li className="list-group-item">Price: {price}</li>
-            <li className="list-group-item">
-              Available: {available ? 'Yes' : 'No'}
-            </li>
-            <li className="list-group-item">Owner: {owner}</li>
-          </ul>
-          <div className="card-body">
-            <a href="#" className="card-link">
-              Card link
-            </a>
-            <a href="#" className="card-link">
-              Another link
-            </a>
-          </div>
+          <p className="card-text">
+            <span className="font-weight-bold" style={{ fontSize: '24px' }}>
+              ${price}
+            </span>
+            <br />
+            <span className="text-muted">{city}</span>
+            <br />
+          </p>
         </div>
       </div>
     );

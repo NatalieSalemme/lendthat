@@ -13,7 +13,7 @@ class Browse extends Component {
     const { item } = this.props;
     return (
       <div>
-        <h3>Browse</h3>
+        <h1 className="text-center mt-5">Browse Items</h1>
         <BrowseItemsMap items={item} />
       </div>
     );

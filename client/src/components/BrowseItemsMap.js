@@ -7,7 +7,11 @@ class BrowseItemsMap extends Component {
     console.log('items from map', items);
     let browseItems;
     if (!items) {
-      browseItems = 'LOADING...';
+      browseItems = (
+        <div className="spinner-border text-primary" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      );
     } else {
       if (items.length > 0) {
         browseItems = items.map(item => (
@@ -19,8 +23,10 @@ class BrowseItemsMap extends Component {
     }
 
     return (
-      <div>
-        <h1>BrowseItemsMap</h1>
+      <div
+        className="mx-auto text-center row"
+        style={{ border: '1px dotted red' }}
+      >
         {browseItems}
       </div>
     );
